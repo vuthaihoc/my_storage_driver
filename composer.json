@@ -1,0 +1,21 @@
+{
+    "name": "vuthaihoc/flysystem-my-storage",
+    "authors": [
+        {
+            "name": "Thái Học Vũ",
+            "email": "vuthaihoc.ttud@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "league/flysystem": "^1.0.40",
+        "illuminate/support": "5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+        "illuminate/cache": "5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*|5.8.*|6.0.*",
+        "guzzlehttp/guzzle": "~6.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Thikdev\\LaFly\\" : "src/"
+        }
+    }
+}
