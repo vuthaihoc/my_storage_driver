@@ -17,7 +17,7 @@ class LaflyStorageProvider extends ServiceProvider {
 	public function boot() {
 		\Storage::extend('lafly', function ($app, $config) {
 			$adapter = new LaFlyAdapter( $config );
-			$adapter->setCacheStore( $app->make('cache.store') );
+			$adapter->setCacheRepository( $app->make('cache.store') );
 			return new Filesystem($adapter);
 		});
 	}

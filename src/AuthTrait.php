@@ -36,13 +36,12 @@ trait AuthTrait {
 	
 	
 	protected function start_login(){
-//		echo $this->try_login . "\n" . $this->max_try_login;
 		if($this->try_login > $this->max_try_login){
 			throw new AuthException("Try login more than "
 			                                   . $this->max_try_login
 			                                   . " times with credential "
 			                                   . $this->config['username']
-			                                   . "|" . $this->config['password']);
+			                                   . "|****");
 		}
 	}
 	protected function reset_login(){
@@ -67,7 +66,7 @@ trait AuthTrait {
 			$data = \GuzzleHttp\json_decode($response->getBody()->getContents(), true);
 			if(isset($data['token'])){
 				$this->token = $data['token'];
-				$this->cache_store->put($this->config['cache_token_name'], $data['token'], 300);
+				$this->cache_repository->put($this->config['cache_token_name'], $data['token'], 300);
 			}
 			return $this->after_login(true);
 		}catch (RequestException $ex){
@@ -134,7 +133,7 @@ trait AuthTrait {
 	 * @throws AuthException
 	 */
 	protected function initClient($authorized = false){
-		$this->token = $this->cache_store->get($this->config['cache_token_name']);
+		$this->token = $this->cache_repository->get($this->config['cache_token_name']);
 		if($authorized && empty($this->token)){
 			$this->login();
 		}

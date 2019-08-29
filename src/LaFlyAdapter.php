@@ -9,7 +9,7 @@
 namespace Thikdev\LaFly;
 
 
-use Illuminate\Contracts\Cache\Store;
+use Illuminate\Contracts\Cache\Repository;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
 
@@ -17,8 +17,8 @@ class LaFlyAdapter implements AdapterInterface {
 	
 	use AuthTrait;
 	
-	/** @var Store */
-	protected $cache_store;
+	/** @var Repository */
+	protected $cache_repository;
 	
 	/**
 	 * LaFlyAdapter constructor.
@@ -41,6 +41,7 @@ class LaFlyAdapter implements AdapterInterface {
 	 * @param Config $config Config object
 	 *
 	 * @return array|false false on failure file meta data on success
+	 * @throws \League\Flysystem\Exception
 	 */
 	public function write( $path, $contents, Config $config ) {
 		return $this->_write('write', $path, $contents, $config);
@@ -54,6 +55,7 @@ class LaFlyAdapter implements AdapterInterface {
 	 * @param Config $config Config object
 	 *
 	 * @return array|false false on failure file meta data on success
+	 * @throws \League\Flysystem\Exception
 	 */
 	public function writeStream( $path, $resource, Config $config ) {
 		return $this->_write('writeStream', $path, $resource, $config);
@@ -67,6 +69,7 @@ class LaFlyAdapter implements AdapterInterface {
 	 * @param Config $config Config object
 	 *
 	 * @return array|false false on failure file meta data on success
+	 * @throws \League\Flysystem\Exception
 	 */
 	public function update( $path, $contents, Config $config ) {
 		return $this->_write('update', $path, $contents, $config);
@@ -80,6 +83,7 @@ class LaFlyAdapter implements AdapterInterface {
 	 * @param Config $config Config object
 	 *
 	 * @return array|false false on failure file meta data on success
+	 * @throws \League\Flysystem\Exception
 	 */
 	public function updateStream( $path, $resource, Config $config ) {
 		return $this->_write('updateStream', $path, $resource, $config);
@@ -282,9 +286,9 @@ class LaFlyAdapter implements AdapterInterface {
 	}
 	
 	/**
-	 * @param Store $cache_store
+	 * @param Repository $cache_repository
 	 */
-	public function setCacheStore( Store $cache_store ) {
-		$this->cache_store = $cache_store;
+	public function setCacheRepository( Repository $cache_repository ) {
+		$this->cache_repository = $cache_repository;
 	}
 }

@@ -24,7 +24,9 @@ $adapter = new \Thikdev\LaFly\LaFlyAdapter( $config );
 
 $cache_store = new \Illuminate\Cache\ArrayStore();
 
-$adapter->setCacheStore( $cache_store );
+$cache_repository = new \Illuminate\Cache\Repository( $cache_store );
+
+$adapter->setCacheRepository( $cache_repository );
 
 $contents = $adapter->listContents();
 
