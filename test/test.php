@@ -31,3 +31,8 @@ $adapter->setCacheRepository( $cache_repository );
 $contents = $adapter->listContents();
 
 var_dump( $contents );
+
+$path = 'write.txt';
+
+echo '\n URL : ' . $adapter->getUrl( $path );
+echo '\n Temporary URL : ' . $adapter->getTemporaryUrl( $path, \Carbon\Carbon::now()->addMinutes(10));

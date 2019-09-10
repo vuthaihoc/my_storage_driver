@@ -12,6 +12,7 @@ namespace Thikdev\LaFly;
 use Illuminate\Contracts\Cache\Repository;
 use League\Flysystem\AdapterInterface;
 use League\Flysystem\Config;
+use Spatie\UrlSigner\MD5UrlSigner;
 
 class LaFlyAdapter implements AdapterInterface {
 	
@@ -290,5 +291,32 @@ class LaFlyAdapter implements AdapterInterface {
 	 */
 	public function setCacheRepository( Repository $cache_repository ) {
 		$this->cache_repository = $cache_repository;
+	}
+	
+	protected function concatPathToUrl($url, $path)
+	{
+		return rtrim($url, '/').'/cdn/' . $this->getConfig( 'connection_name') . "/" .ltrim($path, '/');
+	}
+	
+	public function getUrl($path){
+		var_dump($this->config);
+		if ($cdn = $this->getConfig('cdn')) {
+			return $this->concatPathToUrl($cdn, $path);
+		}elseif ($url = $this->getConfig('url')) {
+			return $this->concatPathToUrl($url, $path);
+		}else{
+			throw new \Exception("Can not found url or cdn config");
+		}
+		
+	}
+	
+	public function getTemporaryUrl($path, $expiration){
+		$url = $this->getUrl( $path );
+		$signed_url = $this->getSigner()->sign( $url, $expiration);
+		return $signed_url;
+	}
+	
+	public function getSigner(){
+		return new MD5UrlSigner( $this->getConfig( 'connection_name'));
 	}
 }

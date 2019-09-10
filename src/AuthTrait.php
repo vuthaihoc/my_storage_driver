@@ -29,6 +29,8 @@ trait AuthTrait {
 		"log_level" => "error",
 		"cache_token_name" => "xxx_",
 		"root" => "",
+		"cdn" => "",
+		"url" => "",
 	];
 	
 	protected $try_login = 0;
@@ -380,5 +382,13 @@ trait AuthTrait {
 		foreach ($this->config as $k => $v){
 			$this->config[$k] = Arr::get($config, $k, $v);
 		}
+	}
+	
+	protected function getConfig($key){
+		return Arr::get($this->config, $key);
+	}
+	
+	protected function hasConfig($key){
+		return Arr::has($this->config, $key);
 	}
 }
