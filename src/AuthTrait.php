@@ -25,6 +25,8 @@ trait AuthTrait {
 		"username" => '',
 		"password" => '',
 		'signer_key' => '',
+		'signer_exp' => '',
+		'signer_sig' => '',
 		"host" => '',
 		"connection_name" => "",
 		"log_level" => "error",
