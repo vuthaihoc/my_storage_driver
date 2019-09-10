@@ -24,6 +24,7 @@ trait AuthTrait {
 	protected $config = [
 		"username" => '',
 		"password" => '',
+		'signer_key' => '',
 		"host" => '',
 		"connection_name" => "",
 		"log_level" => "error",

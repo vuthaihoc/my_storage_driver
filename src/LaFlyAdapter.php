@@ -317,6 +317,10 @@ class LaFlyAdapter implements AdapterInterface {
 	}
 	
 	public function getSigner(){
-		return new MD5UrlSigner( $this->getConfig( 'connection_name'));
+		if($signer_key = $this->getConfig( 'signer_key')){
+			return new MD5UrlSigner( $signer_key );
+		}else{
+			return new MD5UrlSigner( $this->getConfig( 'connection_name'));
+		}
 	}
 }

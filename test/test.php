@@ -16,6 +16,7 @@ $config = [
 	'host'       => 'http://localhost/flystorage/public',
 	'username'   => 'judah.yundt@example.net',
 	'password'   => 'secret',
+	'signer_key'   => 'signer_key',
 	'connection' => 'local_001',
 	'cdn' => 'http://localhost/flystorage/public',
 ];
