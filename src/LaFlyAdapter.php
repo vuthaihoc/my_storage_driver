@@ -299,7 +299,6 @@ class LaFlyAdapter implements AdapterInterface {
 	}
 	
 	public function getUrl($path){
-		var_dump($this->config);
 		if ($cdn = $this->getConfig('cdn')) {
 			return $this->concatPathToUrl($cdn, $path);
 		}elseif ($url = $this->getConfig('url')) {
